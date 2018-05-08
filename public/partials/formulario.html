@@ -1,0 +1,57 @@
+<div class="page-header text-center">
+    <h1>{{foto.titulo}}</h1>
+</div>
+
+<p class="alert-success" ng-show="formulario.$submitted && mensagemSucesso">{{mensagemSucesso}}</p>
+<p class="alert-danger" ng-show="formulario.$submitted && mensagemErro">{{mensagemErro}}</p>
+
+<!-- através do attr name temos acesso ao objeto criado implicitamente pelo Angular -->
+<!-- desabilitado validacao do HTML5 -->
+<form novalidate name="formulario" class="row" id="form" ng-submit="submiter()">
+
+    <div class="col-md-6">
+
+        <div class="form-group">
+            <label>
+                <i class="required-icon">*</i>Título:
+            </label>
+            <input class="form-control" type="text" id="form-titulo" name="titulo" 
+                   ng-model="foto.titulo" placeholder="Descreva o título..." required>
+            <span class="form-control alert-danger error-message" ng-show="formulario.$submitted && formulario.titulo.$error.required">
+                O Título deve ser preenchido
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <i class="required-icon">*</i>URL:
+            </label>
+            <input class="form-control" type="text" id="form-url" name="url" 
+                   ng-model="foto.url" placeholder="Descreva a URL..." required>
+            <span class="form-control alert-danger error-message" ng-show="formulario.$submitted && formulario.url.$error.required">
+                A URL deve ser preenchida
+            </span>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <i class="required-icon">*</i>Descricao:
+            </label>
+            <textarea class="form-control" id="form-desc" name="descricao"
+                      ng-model="foto.descricao" placeholder="Descreva sobre a foto..." required></textarea>
+            <span class="form-control alert-danger error-message" ng-show="formulario.$submitted && formulario.descricao.$error.required">
+                A Descrição deve ser preenchida
+            </span>
+        </div>
+
+        <button type="submit" id="form-btn-save" class="btn btn-primary">Salvar</button>
+        
+        <a class="btn btn-primary" id="form-btn-back" href="/fotos">Voltar</a>
+
+    </div>
+
+    <div class="col-md-6">
+        <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}"></minha-foto>
+    </div>
+
+</form>

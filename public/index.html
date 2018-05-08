@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="fantasticPictures"> <!-- Carregando módulo assim que a view for carregada -->
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        
+        <base href="/"> <!-- html5Mode -->
+
+        <title>Fantastic Pictures</title>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/painel.css">
+        <link rel="stylesheet" href="css/form.css">
+
+        <script src="js/lib/angular.min.js"></script> <!-- Carregando módulo core do Angular -->
+        <script src="js/lib/angular-animate.min.js"></script> <!-- Carregando módulo ngAnimate -->
+        <script src="js/lib/angular-route.min.js"></script> <!-- Carregando módulo ngRoute -->
+
+        <script src="js/app.main.js"></script> <!-- Carregando módulo da Aplicação -->
+        <script src="js/app.routes.js"></script> <!-- Carregando módulo da Rotas -->
+        <script src="js/app.diretivas.js"></script> <!-- Carregando módulo das minhasDiretivas -->
+
+        <script src="js/directives/meu-painel.js"></script> 
+        <script src="js/directives/minha-foto.js"></script>
+
+        <script src="js/controllers/fotos-controller.js"></script>
+        <script src="js/controllers/foto-controller.js"></script>
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="text-center">Fantastic Pictures</h1>
+            </div>
+            
+            <!-- Todo o conteúdo das Views parciais serão jogadasa para entro do elemento ng-view -->
+            <ng-view></ng-view> <!-- Lacuna criada -->
+        </div>
+    </body>
+</html>

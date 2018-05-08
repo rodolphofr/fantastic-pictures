@@ -1,0 +1,11 @@
+.required-icon {
+    color: red;
+    font-weight: bold;
+    font-size: 23px;
+    margin: 2px; 
+}
+
+.error-message {
+    margin-top: 10px;
+    font-weight: bold;
+}

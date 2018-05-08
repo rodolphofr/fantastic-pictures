@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-12">
+        <form>
+
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <a class="btn btn-primary" style="margin-bottom: 10px" href="/fotos/new">Nova Foto</a>
+                </span>
+                    
+                <!-- ng-model realiza um two-way data bind (data bind bidirecional (leitura e escrita)) -->
+                <input class="form-control" 
+                        style="margin-bottom: 10px" 
+                        type="text" placeholder="Filtrar pelo título" ng-model="filtro" ng-model-options="{ debounce: 400 }">
+            </div>
+
+        </form>
+    </div> <!-- fim col-md-12 -->
+</div> <!-- fim row -->
+
+<div class="row">
+
+    <!-- Angular Expression {{}} realiza um data bind unidirecional (soh leitura) -->
+    <!-- Aplicando o filtro na lista de photos baseado em todas as propriedades do objeto passada para o filter -->
+    <!-- Quando usamos a diretiva ng-repeat e um elemento sai da lista ele ganha a classe ng-leave, e quando está para
+            sair ng-leave-active (que está como pseudo-classe na classe painel-animado) -->
+
+    <meu-painel class="col-md-2 painel-animado" ng-repeat="photo in photos | filter: { titulo: filtro }" titulo="{{photo.titulo}}">
+        <minha-foto url="{{photo.url}}" titulo="{{titulo}}">
+    </meu-painel>
+</div>
