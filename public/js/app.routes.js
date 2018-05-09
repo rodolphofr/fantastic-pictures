@@ -1,6 +1,4 @@
 (function() {
-    'use strict';
-    
     var routes = angular.module('fantasticPictures');
     
     routes.config(function($routeProvider, $locationProvider) {
@@ -14,11 +12,11 @@
          $locationProvider.html5Mode(true);
     
         $routeProvider
+            .when('/', { templateUrl: 'partials/principal.html', controller: 'FotosController' })
             .when('/fotos', { templateUrl: 'partials/principal.html', controller: 'FotosController' })
             .when('/fotos/new', { templateUrl: 'partials/formulario.html', controller: 'FotoController' })
             .when('/error', { templateUrl: 'partials/notfound.html' })
             .otherwise({ redirectTo: '/error' });
     
     }); 
-
 })();

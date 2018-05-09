@@ -5,10 +5,6 @@ angularpic.service('PhotoService', PhotoService);
 
 function PhotoService($http) {
 
-    var vm = this;
-
-    vm.all = all;
-
     var all = function() {
         var photos = [];
 

@@ -6,15 +6,13 @@
     
     function FotosController($scope, $http) { // injetado $scope e $http no controller
         
-        var vm = this;
-
-        vm.photos = [];
-        vm.filtro = '';
+        $scope.photos = [];
+        $scope.filtro = '';
     
         // pendurado objeto literal no scopo da view
         $http.get('/v1/fotos')
             .success(function(photos) {
-                vm.photos = photos;
+                $scope.photos = photos;
             })
             .error(function(error) {
                 console.log(error);  

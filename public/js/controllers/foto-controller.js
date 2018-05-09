@@ -6,32 +6,30 @@
 
     function FotoController($scope, $http) {
         
-        var vm = this;
-
-        vm.foto = {
+        $scope.foto = {
             url: '',
             titulo: '',
             descricao: ''
         };
 
-        vm.mensagemSucesso = '';
-        vm.mensagemErro = '';
+        $scope.mensagemSucesso = '';
+        $scope.mensagemErro = '';
 
         $scope.submiter = function() {
             if ($scope.formulario.$valid) {
-                $http.post('v1/fotos', vm.foto)
+                $http.post('v1/fotos', $scope.foto)
                      .success(function(result) {
-                        vm.resetForm();
-                        vm.mensagemSucesso = "Sua foto foi salva com sucesso!";
+                        $scope.resetForm();
+                        $scope.mensagemSucesso = "Sua foto foi salva com sucesso!";
                      })
                      .error(function(error) {
                         console.log(error);
-                        vm.mensagemErro = "Ocorreu algum erro ao tentar salvar sua foto!"
+                        $scope.mensagemErro = "Ocorreu algum erro ao tentar salvar sua foto!"
                      });
             }
         }
 
-        vm.resetForm = function() {
+        $scope.resetForm = function() {
             document.querySelector("#form").reset();
         }
 
