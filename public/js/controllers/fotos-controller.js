@@ -2,22 +2,35 @@
     'use strict';
 
     angular.module('fantasticPictures')
-           .controller('FotosController', ['$scope', '$http', FotosController]);
+           .controller('FotosController', FotosController);
     
-    function FotosController($scope, $http) { // injetado $scope e $http no controller
+    // injetado $scope e FotoService no controller
+    FotosController.$inject = ['$scope', 'FotosService'];
+
+    function FotosController($scope, FotosService) { 
         
-        $scope.photos = [];
+        $scope.fotos = [];
         $scope.filtro = '';
     
-        // pendurado objeto literal no scopo da view
-        $http.get('/v1/fotos')
-            .success(function(photos) {
-                $scope.photos = photos;
-            })
-            .error(function(error) {
-                console.log(error);  
-            });
-    
+        FotosService.todasFotos()
+                .success(function(fotos) {
+                    $scope.fotos = fotos;
+                })
+                .error(function(error) {
+                    console.log(error);
+                });
+
+        $scope.remover = function(foto) {
+            FotosService.removerFoto(foto)
+                .success(function(foto) {
+                    var index = $scope.fotos.indexOf(foto);
+                    $scope.fotos.splice(index, 1);
+                })
+                .error(function(error) {
+                    console.log(error);
+                });
+        }
+
     }
 
 })();

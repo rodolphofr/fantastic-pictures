@@ -15,6 +15,7 @@
             .when('/', { templateUrl: 'partials/principal.html', controller: 'FotosController' })
             .when('/fotos', { templateUrl: 'partials/principal.html', controller: 'FotosController' })
             .when('/fotos/new', { templateUrl: 'partials/formulario.html', controller: 'FotoController' })
+            .when('/fotos/edit/:fotoId', { templateUrl: 'partials/formulario.html', controller: 'FotoController' })
             .when('/error', { templateUrl: 'partials/notfound.html' })
             .otherwise({ redirectTo: '/error' });
     
