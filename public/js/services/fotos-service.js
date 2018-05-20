@@ -1,33 +1,35 @@
 (function() {
     'use strict';
 
-    angular.module('fantasticPictures')
+    angular.module('meusServicos')
            .service('FotosService', FotosService);
     
-    FotosService.$inject = ['$http'];
+    FotosService.$inject = ['$http', '$resource'];
     
-    function FotosService($http) {
+    function FotosService($http, $resource) {
         
-        var baseUrl = 'v1/fotos/';
+        var resource = $resource('v1/fotos/:fotoId', null, {
+            update: { method: 'PUT' }
+        });
         
         this.todasFotos = function() {
-            return $http.get(baseUrl);
+            return resource.query();
         }
     
         this.removerFoto = function(foto) {
-            return $http.delete(baseUrl + foto._id)
+            return resource.delete({ fotoId: foto._id });
         }
     
         this.buscarFoto = function(id) {
-            return $http.get(baseUrl + id);
+            return resource.get({ fotoId: id });
         }
 
         this.salvarFoto = function(foto) {
-            return $http.post(baseUrl, foto);
+            return resource.post({ foto });
         }
 
         this.atualizarFoto = function(foto) {
-            return $http.put(baseUrl + foto._id, foto);
+            return resource.update({ fotoId: foto._id }, foto);
         }
 
     }
