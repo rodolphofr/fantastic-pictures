@@ -42,7 +42,7 @@
         }
 
         var _editaFoto = function(foto) {
-            fotosService.update({ fotoId: foto._id }, function() {
+            fotosService.update({ fotoId: foto._id }, $scope.foto, function() {
                 $scope.mensagemSucesso = "Sua foto foi atualizada com sucesso";
             }, function(error) {
                 console.log(error);
