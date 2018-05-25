@@ -5,30 +5,26 @@
            .controller('FotosController', FotosController);
     
     // injetado $scope e FotoService no controller
-    FotosController.$inject = ['$scope', 'FotosService'];
+    FotosController.$inject = ['$scope', 'fotosService'];
 
-    function FotosController($scope, FotosService) { 
+    function FotosController($scope, fotosService) { 
         
         $scope.fotos = [];
         $scope.filtro = '';
     
-        FotosService.todasFotos()
-                .success(function(fotos) {
-                    $scope.fotos = fotos;
-                })
-                .error(function(error) {
-                    console.log(error);
-                });
+        fotosService.query(function(fotos) {
+            $scope.fotos = fotos;
+        }, function(error) {
+            console.log(error);  
+        });
 
         $scope.remover = function(foto) {
-            FotosService.removerFoto(foto)
-                .success(function(foto) {
-                    var index = $scope.fotos.indexOf(foto);
-                    $scope.fotos.splice(index, 1);
-                })
-                .error(function(error) {
-                    console.log(error);
-                });
+            fotosService.delete( { fotoId: foto._id }, function() {
+                var index = $scope.fotos.indexOf(foto);
+                $scope.fotos.splice(index, 1);
+            }, function(error) {
+                console.log(error);
+            });
         }
 
     }
