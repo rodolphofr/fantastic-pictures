@@ -4,9 +4,9 @@
     angular.module('fantasticPictures')
            .controller('FotoController', FotoController);
 
-    FotoController.$inject = ['$scope', '$routeParams', 'fotosService'];
+    FotoController.$inject = ['$scope', '$routeParams', 'fotosService', 'cadastroFotoService'];
 
-    function FotoController($scope, $routeParams, fotosService) {
+    function FotoController($scope, $routeParams, fotosService, cadastroFotoService) {
 
         $scope.foto = {};
         $scope.foto.grupo = {};
@@ -18,39 +18,21 @@
                 $scope.foto = foto;               
             }, function(error) {
                 console.log(error);
+                $scope.mensagemErro = "Não foi possível obter a foto!";
             });
         }
         
         $scope.submiter = function() {
-            if ($scope.foto._id) {
-                _editaFoto($scope.foto);
-            } else {
-
-                if ($scope.formulario.$valid) {
-                    
-                    fotosService.save($scope.foto, function() {
-                        $scope.mensagemSucesso = "Sua foto foi salva com sucesso!";
-                        _resetForm();
-                    }, function(error) {
-                        console.log(error);
-                        $scope.mensagemErro = "Ocorreu algum erro ao tentar salvar sua foto!";
+            if ($scope.formulario.$valid) {
+                cadastroFotoService.cadastrar($scope.foto)
+                    .then(function(data) {
+                        $scope.mensagemSucesso = data.mensagem;
+                        if (data.inclusao) $scope.foto = {};
+                    })
+                    .catch(function(erro) {
+                        $scope.mensagemErro = erro.mensagem;
                     });
-
-                }
-
             }
-        }
-
-        var _editaFoto = function(foto) {
-            fotosService.update({ fotoId: foto._id }, $scope.foto, function() {
-                $scope.mensagemSucesso = "Sua foto foi atualizada com sucesso";
-            }, function(error) {
-                console.log(error);
-            });
-        }
-
-        var _resetForm = function() {
-            document.querySelector("#form").reset();
         }
 
     }
