@@ -69,6 +69,10 @@ api.listaGrupos = function(req, res) {
         { 
             _id: 3, 
             nome: 'animais'
+        },
+        {
+            _id: 4,
+            nome: 'pessoas'
         }
     ]);
         

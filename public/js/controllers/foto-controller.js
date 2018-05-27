@@ -10,6 +10,8 @@
 
         $scope.foto = {};
         $scope.foto.grupo = {};
+        // $scope.focado = false;
+
         $scope.mensagemSucesso = '';
         $scope.mensagemErro = '';
 
@@ -28,11 +30,14 @@
                     .then(function(data) {
                         $scope.mensagemSucesso = data.mensagem;
                         if (data.inclusao) $scope.foto = {};
+                        // $scope.focado = true;
                     })
                     .catch(function(erro) {
                         $scope.mensagemErro = erro.mensagem;
                     });
             }
+
+            
         }
 
     }
